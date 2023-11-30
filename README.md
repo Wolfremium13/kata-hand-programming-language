@@ -4,6 +4,8 @@
 
 The goal of this kata is to apply and refine TDD (Test-Driven Development) and Extreme Programming techniques by developing an interpreter for a language based on emojis.
 
+Link to the original [description](https://github.com/F0rno/kata-Hand-Programming-Language/#hand-programming-language-kata).
+
 ### Functioning
 
 This language modifies an indefinite-sized memory, composed of cells initialized to 0.
