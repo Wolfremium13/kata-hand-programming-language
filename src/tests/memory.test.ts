@@ -12,4 +12,15 @@ describe('Memory should', () => {
 
         expect(memory.getPointerPosition()).toBe(1);
     });
+
+  it('manage two movements to the right', () => {
+        const instruction = '👉';
+        const pointer = new Pointer();
+        const memory = new Memory(pointer);
+
+        memory.update(instruction);
+        memory.update(instruction);
+
+        expect(memory.getPointerPosition()).toBe(1);
+    });
 });
