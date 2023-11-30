@@ -1,5 +1,5 @@
 export class Instructions {
 	static from(instructions: string){
-        return []
+        return instructions.split('')
     }
 }

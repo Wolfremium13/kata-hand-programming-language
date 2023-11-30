@@ -17,4 +17,17 @@ describe('The interpreter should', () => {
 
 		expect(interpreter.getBuffer()).toBe('A');
 	});
+
+	it('print letter B', () => {
+		const instructions = Instructions.from(
+			"👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊"
+		)
+		const pointer = new Pointer()
+		const memory = new Memory(pointer)
+		const interpreter = new Interpreter(memory)
+
+		interpreter.execute(instructions)
+
+		expect(interpreter.getBuffer()).toBe('B');
+	});
 });
