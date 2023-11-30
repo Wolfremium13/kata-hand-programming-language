@@ -21,6 +21,6 @@ describe('Memory should', () => {
         memory.update(instruction);
         memory.update(instruction);
 
-        expect(memory.getPointerPosition()).toBe(1);
+        expect(memory.getPointerPosition()).toBe(2);
     });
 });
