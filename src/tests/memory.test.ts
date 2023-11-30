@@ -1,38 +1,38 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { Pointer } from '../core/pointer';
 import { Memory } from '../core/memory';
 
 describe('Memory should', () => {
-	it('manage movement to the right', () => {
-        const instruction = '👉';
-        const pointer = new Pointer();
-        const memory = new Memory(pointer);
+	let pointer: Pointer;
+	let memory: Memory;
+	const rightInstruction = '👉';
+	const leftInstruction = '👈';
+	beforeEach(() => {
+		pointer = new Pointer();
+		memory = new Memory(pointer);
+	});
 
-        memory.update(instruction);
-
-        expect(memory.getPointerPosition()).toBe(1);
+    describe('on positions management', () => {
+        it('moves the right', () => {
+            memory.update(rightInstruction);
+    
+            expect(memory.getPointerPosition()).toBe(1);
+        });
+    
+        it('moves twice to the right', () => {
+            memory.update(rightInstruction);
+            memory.update(rightInstruction);
+    
+            expect(memory.getPointerPosition()).toBe(2);
+        });
+    
+        it('moves the left', () => {
+            memory.update(rightInstruction);
+            memory.update(leftInstruction);
+    
+            expect(memory.getPointerPosition()).toBe(0);
+        });
     });
 
-  it('manage two movements to the right', () => {
-        const instruction = '👉';
-        const pointer = new Pointer();
-        const memory = new Memory(pointer);
-
-        memory.update(instruction);
-        memory.update(instruction);
-
-        expect(memory.getPointerPosition()).toBe(2);
-    });
-
-    it('manage movement to the left', () => {
-        const rightInstruction = '👉';
-        const leftInstruction = '👈';
-        const pointer = new Pointer();
-        const memory = new Memory(pointer);
-
-        memory.update(rightInstruction);
-        memory.update(leftInstruction);
-
-        expect(memory.getPointerPosition()).toBe(0);
-    });
+	
 });
