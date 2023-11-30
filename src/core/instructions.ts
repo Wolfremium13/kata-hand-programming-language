@@ -1,5 +1,6 @@
+export type Instruction = "👆" | "👇" | "👉" | "👊" | "👈";
 export class Instructions {
-	static from(instructions: string){
-        return instructions.split('')
+	static from(instructions: string): Instruction[]{
+        return instructions.split('') as Instruction[];
     }
 }
