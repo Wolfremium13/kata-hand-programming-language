@@ -20,5 +20,7 @@ export class Interpreter {
 		} else {
 			this.buffer = 'B'
 		}
+
+		
 	}
 }
