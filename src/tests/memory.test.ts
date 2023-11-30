@@ -23,4 +23,16 @@ describe('Memory should', () => {
 
         expect(memory.getPointerPosition()).toBe(2);
     });
+
+    it('manage movement to the left', () => {
+        const rightInstruction = '👉';
+        const leftInstruction = '👈';
+        const pointer = new Pointer();
+        const memory = new Memory(pointer);
+
+        memory.update(rightInstruction);
+        memory.update(leftInstruction);
+
+        expect(memory.getPointerPosition()).toBe(0);
+    });
 });
