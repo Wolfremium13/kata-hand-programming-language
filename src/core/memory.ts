@@ -9,7 +9,11 @@ export class Memory{
     }
 
     update(instruction: Instruction) {
-        this.position++
+        if (instruction == "👉") {
+            this.position++
+        } else {
+            this.position--
+        }
     }
 
     getPointerPosition(): any {
