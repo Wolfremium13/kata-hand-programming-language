@@ -2,26 +2,45 @@ import { Instruction } from './instructions';
 import { Pointer } from './pointer';
 
 export class Memory {
-	private position = 0;
-	private memory: any[] = [];
-
-	constructor(pointer: Pointer) {}
+	private static readonly DEFAULT_MEMORY_VALUE = 0;
+	private memory: number[] = [Memory.DEFAULT_MEMORY_VALUE];
+	constructor(private pointer: Pointer) {}
 
 	update(instruction: Instruction) {
-		if (instruction == '👉') {
-			this.position++;
-			if (this.position >= this.memory.length) {
-				this.memory.push(0);
-			}
-		} else {
-			this.position--;
+		this.translate(instruction);
+	}
+
+	private translate(instruction: Instruction) {
+		if (instruction === '👉') {
+			this.movePointerToTheRight();
+			return;
 		}
-		if (this.position < 0) {
-			this.position = this.memory.length;
+		if (instruction === '👈') {
+			this.pointer.movesToTheLeft();
+			return;
+		}
+		if (instruction === '👆') {
+			this.pointer.increaseValue(this.getMemory());
+			return;
+		}
+		if (instruction === '👇') {
+			this.pointer.decreaseValue(this.getMemory());
+			return;
 		}
 	}
 
-	getPointerPosition(): any {
-		return this.position;
+	private movePointerToTheRight() {
+		this.pointer.movesToTheRight();
+		this.increaseMemoryIfNeeded();
+	}
+
+	private increaseMemoryIfNeeded() {
+		if (this.pointer.getPosition() > this.memory.length - 1) {
+			this.memory.push(Memory.DEFAULT_MEMORY_VALUE);
+		}
+	}
+
+	getMemory(): number[] {
+		return this.memory;
 	}
 }

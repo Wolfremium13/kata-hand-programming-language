@@ -1,48 +1,24 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Pointer } from '../core/pointer';
 import { Memory } from '../core/memory';
+import { PointerBuilder } from './fixtures/pointer.builder';
 
 describe('Memory should', () => {
 	let pointer: Pointer;
 	let memory: Memory;
-	const rightInstruction = '👉';
-	const leftInstruction = '👈';
+
 	beforeEach(() => {
-		pointer = new Pointer();
+		pointer = new PointerBuilder().build();
 		memory = new Memory(pointer);
 	});
 
-    describe('on positions management', () => {
-        it('moves the right', () => {
-            memory.update(rightInstruction);
-    
-            expect(memory.getPointerPosition()).toBe(1);
-        });
-    
-        it('moves twice to the right', () => {
-            memory.update(rightInstruction);
-            memory.update(rightInstruction);
-    
-            expect(memory.getPointerPosition()).toBe(2);
-        });
-    
-        it('moves the left', () => {
-            memory.update(rightInstruction);
-            memory.update(leftInstruction);
-    
-            expect(memory.getPointerPosition()).toBe(0);
-        });
-
-        it('go to the end when there are not more left positions', () => {
-            memory.update(rightInstruction);
-            memory.update(rightInstruction);
-            memory.update(leftInstruction);
-            memory.update(leftInstruction);
-            memory.update(leftInstruction);
-    
-            expect(memory.getPointerPosition()).toBe(2);
-        });
-    });
-
+	describe('on memory management', () => {
+		const rightInstruction = '👉';
+		it('increase the memory slots', () => {
+			memory.update(rightInstruction);
+			memory.update(rightInstruction);
 	
+			expect(memory.getMemory()).toHaveLength(3);
+		});
+	});
 });

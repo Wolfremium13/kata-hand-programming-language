@@ -3,44 +3,26 @@ import { Instructions } from '../core/instructions';
 import { Pointer } from '../core/pointer';
 import { Memory } from '../core/memory';
 import { Interpreter } from '../core/interpreter';
+import { PointerBuilder } from './fixtures/pointer.builder';
 
 describe('The interpreter should', () => {
-	it('print letter A', () => {
-		const instructions = Instructions.from(
-			'👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊'
-		);
-		const pointer = new Pointer();
-		const memory = new Memory(pointer);
-		const interpreter = new Interpreter(memory);
+	let pointer: Pointer;
+	let memory: Memory;
+	let interpreter: Interpreter;
 
-		interpreter.execute(instructions);
-
-		expect(interpreter.getBuffer()).toBe('A');
+	beforeEach(() => {
+		pointer = new PointerBuilder().build();
+		memory = new Memory(pointer);
+		interpreter = new Interpreter(memory);
 	});
 
-	it('print letter B', () => {
-		const instructions = Instructions.from(
-			'👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊'
-		);
-		const pointer = new Pointer();
-		const memory = new Memory(pointer);
-		const interpreter = new Interpreter(memory);
-
-		interpreter.execute(instructions);
-
-		expect(interpreter.getBuffer()).toBe('B');
-	});
-
-	it('interpret the instructions', () => {
+	it('be able to interpret the instructions', () => {
 		const holaInstruction =
 			'👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👊👉👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👊👉👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊👉👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊';
 		const instructions = Instructions.from(holaInstruction);
-		const pointer = new Pointer();
-		const memory = new Memory(pointer);
-		const interpreter = new Interpreter(memory);
 
 		interpreter.execute(instructions);
 
-		expect(interpreter.getBuffer()).toBe('Hola');
+		expect(interpreter.getBuffer()).toEqual('Hola');
 	});
 });
