@@ -1,4 +1,3 @@
-import { Instruction } from './instructions';
 import { Pointer } from './pointer';
 
 export class Memory {
@@ -6,30 +5,19 @@ export class Memory {
 	private memory: number[] = [Memory.DEFAULT_MEMORY_VALUE];
 	constructor(private pointer: Pointer) {}
 
-	update(instruction: Instruction) {
-		this.translate(instruction);
+	getCurrentValue(): string {
+		return String.fromCharCode(this.memory[this.pointer.getPosition()]);
 	}
-
-	private translate(instruction: Instruction) {
-		if (instruction === '👉') {
-			this.movePointerToTheRight();
-			return;
-		}
-		if (instruction === '👈') {
-			this.pointer.movesToTheLeft();
-			return;
-		}
-		if (instruction === '👆') {
-			this.pointer.increaseValue(this.getMemory());
-			return;
-		}
-		if (instruction === '👇') {
-			this.pointer.decreaseValue(this.getMemory());
-			return;
-		}
+	decreaseValue(): void {
+		this.pointer.decreaseValue(this.getMemory());
 	}
-
-	private movePointerToTheRight() {
+	increaseValue(): void {
+		this.pointer.increaseValue(this.getMemory());
+	}
+	movePointerToTheLeft(): void {
+		this.pointer.movesToTheLeft();
+	}
+	movePointerToTheRight(): void {
 		this.pointer.movesToTheRight();
 		this.increaseMemoryIfNeeded();
 	}

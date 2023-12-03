@@ -8,21 +8,32 @@ export class Interpreter {
 
 	execute(instructions: Instruction[]) {
 		instructions.forEach((instruction) => {
-			if (instruction === '👊') {
-				return;
-			}
-			this.memory.update(instruction);
+			this.executeMemoryActionFrom(instruction);
 		});
-		this.translateMemory();
 	}
-
 	getBuffer(): string {
 		return this.buffer;
 	}
-
-	private translateMemory() {
-		this.memory.getMemory().forEach((value) => {
-			this.buffer += String.fromCharCode(value);
-		});
+	private executeMemoryActionFrom(instruction: Instruction) {
+		if (instruction === '👉') {
+			this.memory.movePointerToTheRight();
+			return;
+		}
+		if (instruction === '👈') {
+			this.memory.movePointerToTheLeft();
+			return;
+		}
+		if (instruction === '👆') {
+			this.memory.increaseValue();
+			return;
+		}
+		if (instruction === '👇') {
+			this.memory.decreaseValue();
+			return;
+		}
+		if (instruction === '👊') {
+			this.buffer += this.memory.getCurrentValue();
+			return;
+		}
 	}
 }

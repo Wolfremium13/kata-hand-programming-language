@@ -13,12 +13,35 @@ describe('Memory should', () => {
 	});
 
 	describe('on memory management', () => {
-		const rightInstruction = '👉';
 		it('increase the memory slots', () => {
-			memory.update(rightInstruction);
-			memory.update(rightInstruction);
-	
+			memory.movePointerToTheRight();
+			memory.movePointerToTheRight();
+
 			expect(memory.getMemory()).toHaveLength(3);
+		});
+
+		it('decrease the value', () => {
+			memory.decreaseValue();
+
+			expect(memory.getCurrentValue()).toBe(String.fromCharCode(255));
+		});
+
+		it('increase the value', () => {
+			memory.increaseValue();
+
+			expect(memory.getCurrentValue()).toBe(String.fromCharCode(1));
+		});
+
+		it('move the pointer to the left', () => {
+			memory.movePointerToTheLeft();
+
+			expect(memory.getCurrentValue()).toBe(String.fromCharCode(0));
+		});
+
+		it('move the pointer to the right', () => {
+			memory.movePointerToTheRight();
+
+			expect(memory.getCurrentValue()).toBe(String.fromCharCode(0));
 		});
 	});
 });
