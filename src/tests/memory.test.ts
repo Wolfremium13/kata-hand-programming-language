@@ -32,6 +32,16 @@ describe('Memory should', () => {
     
             expect(memory.getPointerPosition()).toBe(0);
         });
+
+        it('go to the end when there are not more left positions', () => {
+            memory.update(rightInstruction);
+            memory.update(rightInstruction);
+            memory.update(leftInstruction);
+            memory.update(leftInstruction);
+            memory.update(leftInstruction);
+    
+            expect(memory.getPointerPosition()).toBe(2);
+        });
     });
 
 	
