@@ -1,7 +1,7 @@
-export type Instruction = '👆' | '👇' | '👉' | '👊' | '👈';
+export type Instruction = '👆' | '👇' | '👉' | '👊' | '👈' | '🤜' | '🤛';
 export class Instructions {
 	static from(instructions: string): Instruction[] {
-		if (instructions.match(/[^👆👇👉👊👈]/g)) {
+		if (instructions.match(/[^👆👇👉👊👈🤜🤛]/g)) {
 			throw new Error('Invalid instruction');
 		}
 		if (instructions.length === 0) {
