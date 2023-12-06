@@ -15,41 +15,41 @@ describe('Memory should', () => {
 		it('increase the memory slots', () => {
 			const pointerPosition = PointerPosition.from(2);
 
-			memory.incrementValue(pointerPosition);
+			memory.incrementValueTo(pointerPosition);
 
 			expect(memory.getMemoryCells()).toHaveLength(3);
 		});
 
 		it('decrease the value', () => {
 			const pointerPosition = PointerPosition.from(0);
-			memory.incrementValue(pointerPosition);
+			memory.incrementValueTo(pointerPosition);
 
-			expect(memory.getCurrentValue(pointerPosition)).toBe(1);
+			expect(memory.getCurrentValueFrom(pointerPosition)).toBe(1);
 		});
 
 		it('increase the value', () => {
 			const pointerPosition = PointerPosition.from(0);
-			memory.incrementValue(pointerPosition);
+			memory.incrementValueTo(pointerPosition);
 
-			expect(memory.getCurrentValue(pointerPosition)).toBe(1);
+			expect(memory.getCurrentValueFrom(pointerPosition)).toBe(1);
 		});
 
 		it('start over when we increase the maximum value', () => {
 			const pointerPosition = PointerPosition.from(0);
 
 			for (let _ = 0; _ < maximumMemoryValue + 1; _++) {
-				memory.incrementValue(pointerPosition);
+				memory.incrementValueTo(pointerPosition);
 			}
 
-			expect(memory.getCurrentValue(pointerPosition)).toBe(0);
+			expect(memory.getCurrentValueFrom(pointerPosition)).toBe(0);
 		});
 
 		it('start over when we decrease the minimum value', () => {
 			const pointerPosition = PointerPosition.from(0);
 
-			memory.decrementValue(pointerPosition);
+			memory.decrementValueTo(pointerPosition);
 
-			expect(memory.getCurrentValue(pointerPosition)).toBe(maximumMemoryValue);
+			expect(memory.getCurrentValueFrom(pointerPosition)).toBe(maximumMemoryValue);
 		});
 	});
 });

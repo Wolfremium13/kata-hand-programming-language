@@ -7,7 +7,7 @@ export class Interpreter {
 	private isIgnoringNextCondition: boolean = false;
 	constructor(private readonly memory: Memory, private readonly pointer: Pointer, private buffer: string = '') {}
 
-	execute(instructions: Instruction[]) {
+	interpret(instructions: Instruction[]) {
 		instructions.forEach((instruction) => {
 			this.executeMemoryActionFrom(instruction);
 		});
@@ -47,11 +47,11 @@ export class Interpreter {
 			return;
 		}
 		if (instruction === '👆') {
-			this.memory.incrementValue(this.pointer.getPosition());
+			this.memory.incrementValueTo(this.pointer.getPosition());
 			return;
 		}
 		if (instruction === '👇') {
-			this.memory.decrementValue(this.pointer.getPosition());
+			this.memory.decrementValueTo(this.pointer.getPosition());
 			return;
 		}
 		if (instruction === '👊') {
@@ -61,12 +61,12 @@ export class Interpreter {
 	}
 
 	private isMemoryValueZero(): boolean {
-		const memoryValue = this.memory.getCurrentValue(this.pointer.getPosition());
+		const memoryValue = this.memory.getCurrentValueFrom(this.pointer.getPosition());
 		return memoryValue === 0;
 	}
 
 	private addMemoryValuesToBuffer(): void {
-		const memoryValue = this.memory.getCurrentValue(this.pointer.getPosition());
+		const memoryValue = this.memory.getCurrentValueFrom(this.pointer.getPosition());
 		this.buffer += String.fromCharCode(memoryValue);
 	}
 	
