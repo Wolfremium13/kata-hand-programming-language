@@ -1,9 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { Instructions } from '../core/instructions';
-import { Pointer } from '../core/pointer';
-import { Memory } from '../core/memory';
+import { Instructions } from '../core/instructions/instructions';
+import { Pointer } from '../core/pointer/pointer';
+import { Memory } from '../core/memory/memory';
 import { Interpreter } from '../core/interpreter';
-import { PointerBuilder } from './fixtures/pointer.builder';
 
 describe('The interpreter should', () => {
 	const aInstruction =
@@ -13,9 +12,9 @@ describe('The interpreter should', () => {
 	let interpreter: Interpreter;
 
 	beforeEach(() => {
-		pointer = new PointerBuilder().build();
-		memory = new Memory(pointer);
-		interpreter = new Interpreter(memory);
+		pointer = Pointer.from(0);
+		memory = new Memory();
+		interpreter = new Interpreter(memory, pointer);
 	});
 
 	it('be able display the message', () => {
