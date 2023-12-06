@@ -10,6 +10,9 @@ describe('Pointer should', () => {
 	});
 
 	describe('on positions management', () => {
+		it('cannot be negative', () => {
+			expect(PointerPosition.from(-1)).toEqual(PointerPosition.from(0));
+		});
 		it('moves twice to the right', () => {
 			pointer.movesToTheRight();
 			pointer.movesToTheRight();
