@@ -16,28 +16,13 @@ export class Interpreter {
 		return this.buffer;
 	}
 	private executeMemoryActionFrom(instruction: Instruction) {
-		if (instruction === '🤜') {
-			if (this.isIgnoringInstructions) {
-				this.isIgnoringInstructions = false;
-				return;
-			}
-			this.isIgnoringInstructions = this.isMemoryValueZero() && !this.isIgnoringNextCondition;
-			this.isIgnoringNextCondition = !this.isIgnoringInstructions;
-			return;
-		}
-		if (instruction === '🤛') {
-			if (this.isIgnoringInstructions) {
-				this.isIgnoringInstructions = false;
-				return;
-			}
-			this.isIgnoringInstructions = !this.isMemoryValueZero() && !this.isIgnoringNextCondition;
-			this.isIgnoringNextCondition = !this.isIgnoringInstructions;
+		if (instruction === '🤜' || instruction === '🤛') {
+			this.handleJumping(instruction);
 			return;
 		}
 		if (this.isIgnoringInstructions) {
 			return;
 		}
-
 		if (instruction === '👉') {
 			this.pointer.movesToTheRight();
 			return;
@@ -60,6 +45,21 @@ export class Interpreter {
 		}
 	}
 
+	private handleJumping(instruction: Instruction) {
+		if (this.isIgnoringInstructions) {
+			this.isIgnoringInstructions = false;
+			return;
+		}
+
+		const isMemoryZero = this.isMemoryValueZero();
+		if (instruction === '🤜') {
+			this.isIgnoringInstructions = isMemoryZero && !this.isIgnoringNextCondition;
+		} else {
+			this.isIgnoringInstructions = !isMemoryZero && !this.isIgnoringNextCondition;
+		}
+		this.isIgnoringNextCondition = !this.isIgnoringInstructions;
+	}
+
 	private isMemoryValueZero(): boolean {
 		const memoryValue = this.memory.getCurrentValueFrom(this.pointer.getPosition());
 		return memoryValue === 0;
@@ -69,5 +69,4 @@ export class Interpreter {
 		const memoryValue = this.memory.getCurrentValueFrom(this.pointer.getPosition());
 		this.buffer += String.fromCharCode(memoryValue);
 	}
-	
 }
