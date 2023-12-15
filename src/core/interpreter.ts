@@ -1,4 +1,4 @@
-import { Instruction } from './instructions/instructions';
+import { Instruction, Instructions } from './instructions/instructions';
 import { Memory } from './memory/memory';
 import { Pointer } from './pointer/pointer';
 
@@ -7,8 +7,8 @@ export class Interpreter {
 	private isIgnoringNextCondition: boolean = false;
 	constructor(private readonly memory: Memory, private readonly pointer: Pointer, private buffer: string = '') {}
 
-	interpret(instructions: Instruction[]) {
-		instructions.forEach((instruction) => {
+	interpret(instructions: Instructions) {
+		instructions.asArray().forEach((instruction) => {
 			this.executeMemoryActionFrom(instruction);
 		});
 	}

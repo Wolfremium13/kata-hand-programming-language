@@ -18,7 +18,7 @@ describe('The interpreter should', () => {
 	});
 
 	it('be able display the message', () => {
-		const instructions = Instructions.from(aInstruction).asArray();
+		const instructions = Instructions.from(aInstruction);
 
 		interpreter.interpret(instructions);
 
@@ -27,7 +27,7 @@ describe('The interpreter should', () => {
 
 	it('be able to support some displays 👊', () => {
 		const aaInstruction = aInstruction + '👉' + aInstruction;
-		const instructions = Instructions.from(aaInstruction).asArray();
+		const instructions = Instructions.from(aaInstruction);
 
 		interpreter.interpret(instructions);
 
@@ -35,7 +35,7 @@ describe('The interpreter should', () => {
 	});
 
 	it('jump from 🤜 to right after the corresponding 🤛 if current value its zero', () => {
-		const instructions = Instructions.from('🤜👆🤛👊').asArray();
+		const instructions = Instructions.from('🤜👆🤛👊');
 
 		interpreter.interpret(instructions);
 
@@ -43,7 +43,7 @@ describe('The interpreter should', () => {
 	});
 
 	it('not jump from 🤜 to right after the corresponding 🤛 if current value its not zero', () => {
-		const instructions = Instructions.from('👆🤜👆🤛👊').asArray();
+		const instructions = Instructions.from('👆🤜👆🤛👊');
 
 		interpreter.interpret(instructions);
 
@@ -51,7 +51,7 @@ describe('The interpreter should', () => {
 	});
 
 	it('jump from 🤛 to right after the corresponding 🤜 if current value its not zero', () => {
-		const instructions = Instructions.from('👆🤛👆🤜👊').asArray();
+		const instructions = Instructions.from('👆🤛👆🤜👊');
 
 		interpreter.interpret(instructions);
 
@@ -59,7 +59,7 @@ describe('The interpreter should', () => {
 	});
 
 	it('not jump from 🤛 to right after the corresponding 🤜 if current value its zero', () => {
-		const instructions = Instructions.from('🤛👆🤜👊').asArray();
+		const instructions = Instructions.from('🤛👆🤜👊');
 
 		interpreter.interpret(instructions);
 
@@ -69,7 +69,7 @@ describe('The interpreter should', () => {
 	it('emojis everywhere 😎', () => {
 		const instructions = Instructions.from(
 			'👉👉👉🤜👆👇👆👇👆👇👆👇👆👇👆👇🤛👈👈👈👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊👉👉👉👉👉👉👉👉👉👆🤛👆👇👆👇👆👇👆👇👆👇👆👇👆👇👆👇🤜👇👈👈👈👈👈👈👈👈👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊👉👉👉👉👉👉👆🤛👆👇👆👇👆👇👆👇👆👇👆👇🤜👇👈👈👈👈👈👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👊👉👉👉👉👆🤛👆👇👆👇👆👇👆👇👆👇👆👇👆👇👆👇🤜👇👈👈👈👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊👉👉👉👉👉👉👉👆🤛👆👇👆👇👆👇👆👇🤜👇👈👈👈👈👈👈👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👊👉👉👉👉👉👉👆🤛👆👇👆👇👆👇👆👇🤜👇👈👈👈👈👈👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊👉👉👉👉👉👉👉👉👆🤛👆👇👆👇👆👇👆👇👆👇👆👇👆👇👆👇🤜👇👈👈👈👈👈👈👈👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊👉👉👉👉👉👉👉👉👉👉👆🤛👆👇👆👇👆👇👆👇👆👇👆👇🤜👇👈👈👈👈👈👈👈👈👈👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊👉👉👉👉👉👉👉👆🤛👆👇👆👇👆👇👆👇🤜👇👈👈👈👈👈👈👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊👉👉👉👉🤜👆👇👆👇👆👇👆👇👆👇👆👇👆👇🤛👈👈👈👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👊👉👉👉👆🤛👆👇👆👇👆👇👆👇👆👇🤜👇👈👈👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👊👉👉👉👉👉👉👉👉👉🤜👆👇👆👇👆👇👆👇🤛👈👈👈👈👈👈👈👈👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊👉👉👉👉👉🤜👆👇👆👇👆👇👆👇👆👇👆👇👆👇👆👇🤛👈👈👈👈👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👊👉👉👉👉👉👆🤛👆👇👆👇👆👇👆👇👆👇🤜👇👈👈👈👈👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊👉👉👉👉👉👉👆🤛👆👇👆👇👆👇👆👇👆👇👆👇👆👇👆👇🤜👇👈👈👈👈👈👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊👉👉👉👆🤛👆👇👆👇👆👇👆👇🤜👇👈👈👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👇👊👉👉👉👉👉👉👉👆🤛👆👇👆👇👆👇👆👇🤜👇👈👈👈👈👈👈👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👊'
-		).asArray();
+		);
 
 		interpreter.interpret(instructions);
 
