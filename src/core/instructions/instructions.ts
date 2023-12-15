@@ -9,7 +9,7 @@ export class Instructions {
 			throw new Error('Instructions must not be empty');
 		}
 		if (!instructions.includes('👊')) {
-			throw new Error('Instructions must end with 👊');
+			throw new Error('Instructions must have a display instruction 👊');
 		}
 
 		return new Instructions([...instructions] as Instruction[]);

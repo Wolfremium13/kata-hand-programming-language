@@ -11,7 +11,7 @@ describe('The instructions should', () => {
 	});
 
 	it('not allow instructions without 👊', () => {
-		expect(() => Instructions.from('👆👇👉👈')).toThrowError('Instructions must end with 👊');
+		expect(() => Instructions.from('👆👇👉👈')).toThrowError('Instructions must have a display instruction 👊');
 	});
 
 	it('return the instructions', () => {
