@@ -15,6 +15,6 @@ describe('The instructions should', () => {
 	});
 
 	it('return the instructions', () => {
-		expect(Instructions.from('👆👇👉👈👊')).toEqual(['👆', '👇', '👉', '👈', '👊']);
+		expect(Instructions.from('👆👇👉👈👊').asArray()).toEqual(['👆', '👇', '👉', '👈', '👊']);
 	});
 });

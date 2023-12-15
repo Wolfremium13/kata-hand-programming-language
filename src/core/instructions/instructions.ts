@@ -1,6 +1,7 @@
 export type Instruction = '👆' | '👇' | '👉' | '👊' | '👈' | '🤜' | '🤛';
 export class Instructions {
-	static from(instructions: string): Instruction[] {
+	private constructor(private readonly instructions: Instruction[]) {}
+	static from(instructions: string): Instructions {
 		if (instructions.match(/[^👆👇👉👊👈🤜🤛]/g)) {
 			throw new Error('Invalid instruction');
 		}
@@ -11,6 +12,10 @@ export class Instructions {
 			throw new Error('Instructions must end with 👊');
 		}
 
-		return [...instructions] as Instruction[];
+		return new Instructions([...instructions] as Instruction[]);
+	}
+
+	asArray(): Instruction[] {
+		return this.instructions;
 	}
 }
